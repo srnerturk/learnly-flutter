@@ -1,0 +1,194 @@
+You are a senior Flutter engineer and product-minded developer.
+
+# 🧠 PRODUCT OVERVIEW
+
+We are building a mobile learning application called "Learnly".
+
+Core idea:
+Users can upload or input content (PDF, image, or text), and the system transforms it into:
+- Audio summaries (text-to-speech)
+- Podcast-style conversations
+- Flashcards
+- Quiz questions
+
+The goal is:
+"Help users learn by listening, testing, and repeating."
+
+This is NOT just a content generator.
+This is a **learning experience platform**.
+
+---
+
+# 🔥 CORE FEATURES
+
+1. Content Input
+- Text input
+- PDF upload (future-ready)
+- Image OCR (future-ready)
+
+2. AI Outputs
+- Audio Summary
+- Podcast
+- Flashcards
+- Quiz
+
+3. Learning Loop
+- Listen → Understand → Test → Retain
+
+4. Shareability (IMPORTANT)
+- Users can mark generated content as:
+  - Private
+  - Public
+- Public content can be explored by other users
+- Users can share their generated learning content
+
+---
+
+# 🎯 MVP SCOPE (STRICT)
+
+Focus ONLY on:
+- Text input
+- Audio summary (mocked or placeholder)
+- Basic quiz (mock data)
+- Basic flashcards (mock data)
+- Private/Public toggle (UI only)
+- Share button (UI only)
+- Search bar for public content (UI only)
+
+DO NOT implement:
+- Real backend
+- Authentication
+- Payments
+- Complex state persistence
+
+---
+
+# 🏗️ ARCHITECTURE
+
+Use Feature-Based Architecture:
+
+lib/
+  core/
+  features/
+    home/
+    upload/
+    processing/
+    player/
+    quiz/
+    flashcards/
+  shared/
+
+---
+
+# ⚙️ STATE MANAGEMENT
+
+- Use Riverpod
+- Keep state simple
+- Avoid over-engineering
+
+---
+
+# 🎨 UI PRINCIPLES
+
+- Clean and modern
+- Minimal cognitive load
+- Fast interactions
+- Mobile-first UX
+
+---
+
+# 📱 SCREENS
+
+1. Home Screen
+- Recent items
+- Search bar (for public content)
+- Quick upload button
+
+2. Upload Screen
+- Text input
+- Private/Public toggle
+
+3. Processing Screen
+- Select outputs:
+  - Audio Summary
+  - Podcast
+  - Flashcards
+  - Quiz
+- "Generate All" button
+- Private/Public toggle
+
+4. Result Hub
+- Audio player placeholder
+- Flashcards preview
+- Quiz entry
+- Share button
+- Visibility status (Private/Public)
+
+5. Quiz Screen
+- Multiple choice questions (mock)
+- Score display
+- Share button
+
+6. Flashcards Screen
+- Card UI (flip placeholder)
+- Share button
+
+---
+
+# 🔊 AUDIO
+
+- Use placeholder UI (no real TTS yet)
+- Simulate playback UI
+
+---
+
+# 🧠 DATA
+
+Use mock data for:
+- Flashcards
+- Quiz
+- Audio
+
+---
+
+# 🔄 NAVIGATION
+
+- Simple Navigator (no complex routing)
+- Keep flows clear and linear
+
+---
+
+# 🧹 CLEAN CODE RULES
+
+- No widget > 200 lines
+- Extract reusable components
+- Use meaningful naming
+- Avoid deeply nested widgets
+
+---
+
+# 🚫 AVOID
+
+- Over-engineering
+- Backend logic
+- Complex architecture decisions
+- Premature optimization
+
+---
+
+# ✅ DEVELOPMENT APPROACH
+
+- Build screen by screen
+- Make everything runnable
+- Use mock data
+- Focus on UX flow first
+
+---
+
+# 🎯 FIRST TASK
+
+Start by building:
+1. Home Screen
+2. Upload Screen
+
+Make them clean, modern, and connected via navigation.
