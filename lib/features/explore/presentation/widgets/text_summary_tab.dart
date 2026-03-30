@@ -26,7 +26,7 @@ class TextSummaryTab extends StatelessWidget {
           const Gap(24),
           _SummarySection(
             heading: 'Genel Bakış',
-            emoji: '🔍',
+            icon: Icons.search_rounded,
             text:
                 '${item.title}, günümüzde büyük önem taşıyan ve pek çok alanda etkisi görülen bir konudur. '
                 'Bu özet, konunun temel kavramlarını, tarihsel gelişimini ve güncel yansımalarını kapsamaktadır. '
@@ -35,7 +35,7 @@ class TextSummaryTab extends StatelessWidget {
           const Gap(20),
           _SummarySection(
             heading: 'Temel Kavramlar',
-            emoji: '📌',
+            icon: Icons.push_pin_rounded,
             text:
                 'Bu konuyu anlamak için önce temel kavramları kavramak gerekmektedir. '
                 'Her bir kavram, birbiriyle ilişkili ve bütünsel bir anlam taşımaktadır. '
@@ -44,7 +44,7 @@ class TextSummaryTab extends StatelessWidget {
           const Gap(20),
           _SummarySection(
             heading: 'Tarihsel Süreç',
-            emoji: '⏳',
+            icon: Icons.schedule_rounded,
             text:
                 'Konunun gelişim süreci incelendiğinde, önemli kırılma noktaları ve dönüm anları göze çarpmaktadır. '
                 'Bu süreçte yaşanan değişimler, bugünkü anlayışımızı doğrudan şekillendirmiştir. '
@@ -53,7 +53,7 @@ class TextSummaryTab extends StatelessWidget {
           const Gap(20),
           _SummarySection(
             heading: 'Güncel Önemi',
-            emoji: '🌍',
+            icon: Icons.public_rounded,
             text:
                 'Bugün bu konu, birçok sektörde ve gündelik hayatta karşımıza çıkmaktadır. '
                 'Teknoloji, eğitim, sağlık ve ekonomi gibi alanlardaki etkileri giderek artmaktadır. '
@@ -95,11 +95,11 @@ class _MetaBadge extends StatelessWidget {
 
 class _SummarySection extends StatelessWidget {
   final String heading;
-  final String emoji;
+  final IconData icon;
   final String text;
 
   const _SummarySection(
-      {required this.heading, required this.emoji, required this.text});
+      {required this.heading, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _SummarySection extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 18)),
+            Icon(icon, color: AppColors.primary, size: 17),
             const Gap(8),
             Text(heading, style: AppTextStyles.titleSmall),
           ],
@@ -155,7 +155,7 @@ class _KeyTermsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('📚', style: TextStyle(fontSize: 16)),
+              const Icon(Icons.menu_book_rounded, color: AppColors.primary, size: 17),
               const Gap(8),
               Text('Anahtar Terimler', style: AppTextStyles.titleSmall),
             ],

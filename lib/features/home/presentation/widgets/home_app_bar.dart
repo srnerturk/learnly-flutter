@@ -4,6 +4,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/learnly_logo.dart';
 import '../../../../shared/widgets/pro_badge.dart';
+import '../../../paywall/presentation/paywall_sheet.dart';
+import '../../../search/presentation/search_overlay.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isPro;
@@ -31,15 +33,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             const LearnlyLogo(),
             const Gap(8),
             if (!isPro)
-              ProBadge(onTap: () {
-                // TODO: open paywall
-              }),
+              ProBadge(onTap: () => showPaywallSheet(context)),
             const Spacer(),
             _XpBadge(xp: xpPoints),
             const Gap(8),
             _AppBarIconButton(
               icon: Icons.search_rounded,
-              onTap: () {},
+              onTap: () => showSearchOverlay(context),
             ),
             const Gap(8),
             _AppBarIconButton(
@@ -72,7 +72,7 @@ class _XpBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('⚡', style: TextStyle(fontSize: 12)),
+          const Icon(Icons.bolt_rounded, color: AppColors.primary, size: 13),
           const Gap(5),
           Text(
             '${_format(xp)} XP',

@@ -1,4 +1,17 @@
+import 'package:flutter/material.dart';
+
 enum LearningItemType { audioSummary, flashcards, quiz, textSummary }
+
+extension LearningItemTypeIcon on LearningItemType {
+  IconData get icon {
+    switch (this) {
+      case LearningItemType.audioSummary: return Icons.headphones_rounded;
+      case LearningItemType.flashcards: return Icons.style_rounded;
+      case LearningItemType.quiz: return Icons.quiz_rounded;
+      case LearningItemType.textSummary: return Icons.article_rounded;
+    }
+  }
+}
 
 class LearningItem {
   final String id;
@@ -21,16 +34,5 @@ class LearningItem {
     this.authorHandle,
   });
 
-  String get typeIcons => types.map((t) {
-        switch (t) {
-          case LearningItemType.audioSummary:
-            return '🎧';
-          case LearningItemType.flashcards:
-            return '🃏';
-          case LearningItemType.quiz:
-            return '🧠';
-          case LearningItemType.textSummary:
-            return '📝';
-        }
-      }).join(' ');
+  List<IconData> get typeIconList => types.map((t) => t.icon).toList();
 }

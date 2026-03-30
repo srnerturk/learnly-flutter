@@ -7,14 +7,14 @@ import '../../../../shared/data/mock_data.dart';
 import '../../../../shared/models/learning_item.dart';
 import 'content_detail_screen.dart';
 
-const _categoryEmojis = {
-  'Teknoloji': '💻',
-  'Tarih': '📜',
-  'Bilim': '🔬',
-  'Dil': '💬',
-  'İş Dünyası': '💼',
-  'Sanat': '🎨',
-  'Kişisel Gelişim': '🚀',
+const _categoryIcons = {
+  'Teknoloji': Icons.computer_rounded,
+  'Tarih': Icons.history_edu_rounded,
+  'Bilim': Icons.science_rounded,
+  'Dil': Icons.translate_rounded,
+  'İş Dünyası': Icons.business_center_rounded,
+  'Sanat': Icons.palette_rounded,
+  'Kişisel Gelişim': Icons.trending_up_rounded,
 };
 
 class ExploreScreen extends StatefulWidget {
@@ -128,6 +128,7 @@ class _SearchBar extends StatelessWidget {
             hintStyle: AppTextStyles.bodyMedium,
             prefixIcon: const Icon(Icons.search_rounded,
                 color: AppColors.textTertiary, size: 20),
+            filled: false,
             border: InputBorder.none,
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -163,27 +164,23 @@ class _CategoryFilterBar extends StatelessWidget {
         itemBuilder: (context, i) {
           final cat = all[i];
           final isSelected = selected == cat;
-          final color = cat == 'Tümü'
-              ? AppColors.primary
-              : (_categoryColors[cat] ?? AppColors.primary);
           return GestureDetector(
             onTap: () => onSelect(cat),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 180),
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: isSelected ? color : AppColors.surfaceVariant,
+                color: isSelected
+                    ? AppColors.primary
+                    : AppColors.surfaceVariant,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: isSelected
-                      ? color
-                      : AppColors.border,
+                  color: isSelected ? AppColors.primary : AppColors.border,
                 ),
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: color.withValues(alpha: 0.3),
+                          color: AppColors.primary.withValues(alpha: 0.28),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         )
@@ -192,10 +189,13 @@ class _CategoryFilterBar extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  if (cat != 'Tümü')
-                    Text(
-                      _categoryEmojis[cat] ?? '',
-                      style: const TextStyle(fontSize: 13),
+                  if (cat != 'Tümü' && _categoryIcons[cat] != null)
+                    Icon(
+                      _categoryIcons[cat],
+                      size: 13,
+                      color: isSelected
+                          ? AppColors.background
+                          : AppColors.textSecondary,
                     ),
                   if (cat != 'Tümü') const Gap(5),
                   Text(
@@ -204,9 +204,7 @@ class _CategoryFilterBar extends StatelessWidget {
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                       color: isSelected
-                          ? (cat == 'Tümü'
-                              ? AppColors.background
-                              : Colors.black)
+                          ? AppColors.background
                           : AppColors.textSecondary,
                     ),
                   ),
@@ -230,9 +228,6 @@ class ExploreItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final catColor =
-        _categoryColors[item.category] ?? AppColors.textTertiary;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -241,81 +236,49 @@ class ExploreItemCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           border: Border.all(color: AppColors.border),
         ),
-        child: Column(
-          children: [
-            // Gradient header strip
-            Container(
-              height: 5,
-              decoration: BoxDecoration(
-                color: catColor,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(18)),
-                boxShadow: [
-                  BoxShadow(
-                    color: catColor.withValues(alpha: 0.4),
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                _CategoryChip(
-                                    label: item.category, color: catColor),
-                                const Gap(6),
-                                Text(
-                                  _categoryEmojis[item.category] ?? '📚',
-                                  style: const TextStyle(fontSize: 13),
-                                ),
-                              ],
-                            ),
-                            const Gap(8),
-                            Text(
-                              item.title,
-                              style: AppTextStyles.titleMedium,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  _CategoryChip(label: item.category),
+                  const Gap(6),
+                  Icon(
+                    _categoryIcons[item.category] ?? Icons.auto_stories_rounded,
+                    size: 13,
+                    color: AppColors.textTertiary,
                   ),
-                  const Gap(12),
-                  Row(
-                    children: [
-                      _AuthorChip(handle: item.authorHandle ?? ''),
-                      const Gap(10),
-                      const Icon(Icons.people_outline_rounded,
-                          size: 13, color: AppColors.textTertiary),
-                      const Gap(4),
-                      Text('${item.learnerCount}',
-                          style: AppTextStyles.bodySmall),
-                      const Spacer(),
-                      ...item.types.map((t) => Padding(
-                            padding: const EdgeInsets.only(left: 4),
-                            child: _TypeBadge(type: t),
-                          )),
-                    ],
-                  ),
-                  const Gap(14),
-                  _StartButton(color: catColor, onTap: onTap),
                 ],
               ),
-            ),
-          ],
+              const Gap(8),
+              Text(
+                item.title,
+                style: AppTextStyles.titleMedium,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const Gap(12),
+              Row(
+                children: [
+                  _AuthorChip(handle: item.authorHandle ?? ''),
+                  const Gap(10),
+                  const Icon(Icons.people_outline_rounded,
+                      size: 13, color: AppColors.textTertiary),
+                  const Gap(4),
+                  Text('${item.learnerCount}', style: AppTextStyles.bodySmall),
+                  const Spacer(),
+                  ...item.types.map((t) => Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: _TypeBadge(type: t),
+                      )),
+                ],
+              ),
+              const Gap(14),
+              _StartButton(onTap: onTap),
+            ],
+          ),
         ),
       ),
     );
@@ -324,20 +287,23 @@ class ExploreItemCard extends StatelessWidget {
 
 class _CategoryChip extends StatelessWidget {
   final String label;
-  final Color color;
-  const _CategoryChip({required this.label, required this.color});
+  const _CategoryChip({required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
+        color: AppColors.primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Text(label,
-          style: TextStyle(
-              fontSize: 11, fontWeight: FontWeight.w700, color: color)),
+      child: Text(
+        label,
+        style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+            color: AppColors.primary),
+      ),
     );
   }
 }
@@ -379,12 +345,12 @@ class _TypeBadge extends StatelessWidget {
   final LearningItemType type;
   const _TypeBadge({required this.type});
 
-  String get _emoji {
+  IconData get _icon {
     switch (type) {
-      case LearningItemType.audioSummary: return '🎧';
-      case LearningItemType.flashcards: return '🃏';
-      case LearningItemType.quiz: return '🧠';
-      case LearningItemType.textSummary: return '📝';
+      case LearningItemType.audioSummary: return Icons.headphones_rounded;
+      case LearningItemType.flashcards: return Icons.style_rounded;
+      case LearningItemType.quiz: return Icons.quiz_rounded;
+      case LearningItemType.textSummary: return Icons.article_rounded;
     }
   }
 
@@ -398,16 +364,17 @@ class _TypeBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(7),
         border: Border.all(color: AppColors.border),
       ),
-      child: Center(child: Text(_emoji, style: const TextStyle(fontSize: 13))),
+      child: Center(
+        child: Icon(_icon, color: AppColors.textTertiary, size: 14),
+      ),
     );
   }
 }
 
 
 class _StartButton extends StatelessWidget {
-  final Color color;
   final VoidCallback onTap;
-  const _StartButton({required this.color, required this.onTap});
+  const _StartButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -417,13 +384,11 @@ class _StartButton extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [color, color.withValues(alpha: 0.7)],
-          ),
+          gradient: const LinearGradient(colors: AppColors.primaryGradient),
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.3),
+              color: AppColors.primary.withValues(alpha: 0.28),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -434,11 +399,12 @@ class _StartButton extends StatelessWidget {
           children: [
             Text('Çalışmaya Başla',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.background,
                     fontSize: 14,
                     fontWeight: FontWeight.w800)),
             Gap(6),
-            Icon(Icons.arrow_forward_rounded, color: Colors.black, size: 16),
+            Icon(Icons.arrow_forward_rounded,
+                color: AppColors.background, size: 16),
           ],
         ),
       ),

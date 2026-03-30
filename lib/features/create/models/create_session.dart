@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum InputMethod { document, text, camera, gallery }
 
 enum ContentType {
@@ -32,16 +34,16 @@ enum ContentType {
     }
   }
 
-  String get emoji {
+  IconData get icon {
     switch (this) {
       case audioSummary:
-        return '🎧';
+        return Icons.headphones_rounded;
       case flashcards:
-        return '🃏';
+        return Icons.style_rounded;
       case quiz:
-        return '🧠';
+        return Icons.quiz_rounded;
       case textSummary:
-        return '📝';
+        return Icons.article_rounded;
     }
   }
 }
@@ -51,7 +53,7 @@ class VoiceOption {
   final String name;
   final String description;
   final String gender;
-  final String emoji;
+  final IconData icon;
   final bool isPro;
 
   const VoiceOption({
@@ -59,7 +61,7 @@ class VoiceOption {
     required this.name,
     required this.description,
     required this.gender,
-    required this.emoji,
+    required this.icon,
     this.isPro = false,
   });
 }

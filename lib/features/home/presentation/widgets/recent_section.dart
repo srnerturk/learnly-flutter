@@ -6,12 +6,12 @@ import '../../../../shared/data/mock_data.dart';
 import '../../../../shared/models/learning_item.dart';
 
 const _categoryMeta = {
-  'Teknoloji': (color: Color(0xFF00CFFF), emoji: '💻'),
-  'Tarih': (color: Color(0xFFFF7A00), emoji: '📜'),
-  'Bilim': (color: Color(0xFF00E676), emoji: '🔬'),
-  'Dil': (color: Color(0xFFFFCC00), emoji: '💬'),
-  'İş Dünyası': (color: Color(0xFFFF4757), emoji: '💼'),
-  'Sanat': (color: Color(0xFFFF6BCE), emoji: '🎨'),
+  'Teknoloji': (color: AppColors.primary, icon: Icons.computer_rounded),
+  'Tarih': (color: AppColors.accent, icon: Icons.history_edu_rounded),
+  'Bilim': (color: AppColors.success, icon: Icons.science_rounded),
+  'Dil': (color: AppColors.gold, icon: Icons.translate_rounded),
+  'İş Dünyası': (color: AppColors.error, icon: Icons.business_center_rounded),
+  'Sanat': (color: Color(0xFFBB86FC), icon: Icons.palette_rounded),
 };
 
 class RecentSection extends StatelessWidget {
@@ -66,7 +66,7 @@ class _RecentItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final meta = _categoryMeta[item.category] ??
-        (color: AppColors.textTertiary, emoji: '📚');
+        (color: AppColors.textTertiary, icon: Icons.auto_stories_rounded);
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -89,7 +89,7 @@ class _RecentItemCard extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text(meta.emoji, style: const TextStyle(fontSize: 22)),
+              child: Icon(meta.icon, color: meta.color, size: 22),
             ),
           ),
           const Gap(12),
@@ -112,9 +112,11 @@ class _RecentItemCard extends StatelessWidget {
                       color: meta.color,
                     ),
                     const Gap(6),
-                    Text(
-                      item.typeIcons,
-                      style: const TextStyle(fontSize: 12),
+                    ...item.typeIconList.map(
+                      (ic) => Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Icon(ic, size: 13, color: AppColors.textTertiary),
+                      ),
                     ),
                   ],
                 ),
@@ -178,7 +180,7 @@ class _XpTag extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text('⚡', style: TextStyle(fontSize: 10)),
+          const Icon(Icons.bolt_rounded, color: AppColors.gold, size: 11),
           const Gap(3),
           Text(
             '+$xp XP',

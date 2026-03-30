@@ -173,7 +173,12 @@ class _PublicCard extends StatelessWidget {
                 style: AppTextStyles.bodySmall,
               ),
               const Spacer(),
-              Text(item.typeIcons, style: const TextStyle(fontSize: 14)),
+              ...item.typeIconList.map(
+                (ic) => Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Icon(ic, size: 14, color: AppColors.textTertiary),
+                ),
+              ),
             ],
           ),
           const Gap(12),

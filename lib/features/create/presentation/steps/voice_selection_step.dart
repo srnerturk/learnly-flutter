@@ -105,7 +105,11 @@ class _VoiceTile extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: Text(voice.emoji, style: const TextStyle(fontSize: 22)),
+                child: Icon(
+                  voice.icon,
+                  color: selected ? AppColors.primary : AppColors.textSecondary,
+                  size: 22,
+                ),
               ),
             ),
             const Gap(12),

@@ -18,9 +18,14 @@ const _categoryColors = {
   'Kişisel Gelişim': Color(0xFFA78BFA),
 };
 
-const _categoryEmojis = {
-  'Teknoloji': '💻', 'Tarih': '📜', 'Bilim': '🔬',
-  'Dil': '💬', 'İş Dünyası': '💼', 'Sanat': '🎨', 'Kişisel Gelişim': '🚀',
+const _categoryIcons = {
+  'Teknoloji': Icons.computer_rounded,
+  'Tarih': Icons.history_edu_rounded,
+  'Bilim': Icons.science_rounded,
+  'Dil': Icons.translate_rounded,
+  'İş Dünyası': Icons.business_center_rounded,
+  'Sanat': Icons.palette_rounded,
+  'Kişisel Gelişim': Icons.trending_up_rounded,
 };
 
 class ContentDetailScreen extends StatefulWidget {
@@ -123,15 +128,16 @@ class _DetailHeader extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          // Large background emoji — bottom right
+          // Large background icon — bottom right
           Positioned(
-            right: -8,
-            bottom: 16,
+            right: -12,
+            bottom: 8,
             child: Opacity(
-              opacity: 0.35,
-              child: Text(
-                _categoryEmojis[item.category] ?? '📚',
-                style: const TextStyle(fontSize: 110),
+              opacity: 0.18,
+              child: Icon(
+                _categoryIcons[item.category] ?? Icons.auto_stories_rounded,
+                size: 110,
+                color: Colors.white,
               ),
             ),
           ),
@@ -234,12 +240,12 @@ class _TabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(48);
 
-  String _emoji(LearningItemType t) {
+  IconData _icon(LearningItemType t) {
     switch (t) {
-      case LearningItemType.audioSummary: return '🎧';
-      case LearningItemType.textSummary: return '📝';
-      case LearningItemType.flashcards: return '🃏';
-      case LearningItemType.quiz: return '🧠';
+      case LearningItemType.audioSummary: return Icons.headphones_rounded;
+      case LearningItemType.textSummary: return Icons.article_rounded;
+      case LearningItemType.flashcards: return Icons.style_rounded;
+      case LearningItemType.quiz: return Icons.quiz_rounded;
     }
   }
 
@@ -270,7 +276,7 @@ class _TabBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(_emoji(t), style: const TextStyle(fontSize: 14)),
+              Icon(_icon(t), size: 14),
               const Gap(5),
               Text(_label(t)),
             ],

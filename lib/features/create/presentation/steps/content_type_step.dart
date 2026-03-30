@@ -99,7 +99,7 @@ class _ContentTypeCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(type.emoji, style: const TextStyle(fontSize: 28)),
+                Icon(type.icon, color: color, size: 26),
                 if (selected)
                   Container(
                     width: 20,

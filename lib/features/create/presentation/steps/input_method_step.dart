@@ -258,6 +258,7 @@ class _TextInputAreaState extends State<_TextInputArea> {
               hintText:
                   'Öğrenmek istediğin metni buraya yapıştır...\n\nÖrn: Ders notları, makale, Wikipedia içeriği, blog yazısı vb.',
               hintStyle: AppTextStyles.bodyMedium.copyWith(height: 1.6),
+              filled: false,
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
               focusedBorder: InputBorder.none,

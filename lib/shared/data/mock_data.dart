@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import '../models/learning_item.dart';
 import '../../features/create/models/create_session.dart';
 
@@ -141,12 +142,12 @@ abstract class MockData {
   ];
 
   static const List<VoiceOption> voices = [
-    VoiceOption(id: 'aria', name: 'Aria', description: 'Profesyonel & Net', gender: 'Kadın', emoji: '👩‍💼'),
-    VoiceOption(id: 'nova', name: 'Nova', description: 'Sıcak & Samimi', gender: 'Kadın', emoji: '🌟'),
-    VoiceOption(id: 'marcus', name: 'Marcus', description: 'Derin & Güvenilir', gender: 'Erkek', emoji: '🎙️'),
-    VoiceOption(id: 'liam', name: 'Liam', description: 'Enerjik & Dinamik', gender: 'Erkek', emoji: '⚡'),
-    VoiceOption(id: 'zara', name: 'Zara', description: 'Çarpıcı & Akıcı', gender: 'Kadın', emoji: '✨', isPro: true),
-    VoiceOption(id: 'atlas', name: 'Atlas', description: 'Dramatik & Etkileyici', gender: 'Erkek', emoji: '🌍', isPro: true),
+    VoiceOption(id: 'aria', name: 'Aria', description: 'Profesyonel & Net', gender: 'Kadın', icon: Icons.person_rounded),
+    VoiceOption(id: 'nova', name: 'Nova', description: 'Sıcak & Samimi', gender: 'Kadın', icon: Icons.person_2_rounded),
+    VoiceOption(id: 'marcus', name: 'Marcus', description: 'Derin & Güvenilir', gender: 'Erkek', icon: Icons.mic_rounded),
+    VoiceOption(id: 'liam', name: 'Liam', description: 'Enerjik & Dinamik', gender: 'Erkek', icon: Icons.bolt_rounded),
+    VoiceOption(id: 'zara', name: 'Zara', description: 'Çarpıcı & Akıcı', gender: 'Kadın', icon: Icons.auto_awesome_rounded, isPro: true),
+    VoiceOption(id: 'atlas', name: 'Atlas', description: 'Dramatik & Etkileyici', gender: 'Erkek', icon: Icons.language_rounded, isPro: true),
   ];
 
   static const List<String> categories = [

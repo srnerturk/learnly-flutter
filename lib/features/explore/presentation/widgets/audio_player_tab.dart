@@ -295,7 +295,7 @@ class _KeyPointsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('✨', style: TextStyle(fontSize: 16)),
+              const Icon(Icons.lightbulb_rounded, color: AppColors.gold, size: 17),
               const Gap(8),
               Text('Öne Çıkan Noktalar', style: AppTextStyles.titleSmall),
             ],

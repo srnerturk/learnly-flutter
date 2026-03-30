@@ -177,7 +177,8 @@ class _HeroSection extends StatelessWidget {
                 ],
               ),
               child: const Center(
-                child: Text('✨', style: TextStyle(fontSize: 34)),
+                child: Icon(Icons.auto_awesome_rounded,
+                    color: AppColors.primary, size: 34),
               ),
             )
                 .animate(onPlay: (c) => c.repeat(reverse: true))
@@ -266,7 +267,7 @@ class _GeneratingItem extends StatelessWidget {
               border: Border.all(color: _color.withValues(alpha: 0.2)),
             ),
             child: Center(
-              child: Text(type.emoji, style: const TextStyle(fontSize: 20)),
+              child: Icon(type.icon, color: _color, size: 20),
             ),
           ),
           const Gap(12),
